@@ -45,7 +45,7 @@ function saveUser(req, res) {
       } else {
         //In case no duplicate users it will encrypt the password
         bcrypt.genSalt(10, function (err, salt) {
-          bcrypt.hash(params.password, "salt", (err, hash) => {
+          bcrypt.hash(params.password, 10, (err, hash) => {
             user.password = hash;
             user.save((err, userStored) => {
               //o tendrá un error o un usuario guardado

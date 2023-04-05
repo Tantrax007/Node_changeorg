@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "2e917e84-d2a5-4db4-a9f7-fe5fe708d20d",
+		"name": "Node_ChangeOrg",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "18089674"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "GetAHome",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3800/api/user/home"
+					},
+					"response": []
+				},
+				{
+					"name": "PostAPruebas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:3800/api/user/pruebas"
+					},
+					"response": []
+				},
+				{
+					"name": "RegistrarUsuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NDJkNWMwYjI4Yjc5MTQxM2FiYzRlZjQiLCJuYW1lIjoiWm9yYWlkYSIsImVtYWlsIjoiem9yYWlkYUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiaW1hZ2UiOm51bGwsImlhdCI6MTY4MDY5NjA4NSwiZXhwIjoxNjgzMjg4MDg1fQ.V8BKGvW2CxrvAkgXlLzLV2fKtyUpln7-tz1V030fcRE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Josemanuel\",\n    \"email\":\"josemanuel@gmail.com\",\n    \"password\":\"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3800/api/saveuser"
+					},
+					"response": []
+				},
+				{
+					"name": "ObtenerTodosPaginado",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NDJkNWMwYjI4Yjc5MTQxM2FiYzRlZjQiLCJuYW1lIjoiWm9yYWlkYSIsImVtYWlsIjoiem9yYWlkYUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiaW1hZ2UiOm51bGwsImlhdCI6MTY4MDY5NTUzOSwiZXhwIjoxNjgzMjg3NTM5fQ._sTrY20Ssgn5klxLBt4Cv8opNXk-C-eUz_5mruFlWHI",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:3800/api/getuser/1"
+					},
+					"response": []
+				},
+				{
+					"name": "LoginUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"maria@gmail.com\",\n    \"password\":\"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3800/api/login"
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarUsuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NDJkNWMwYjI4Yjc5MTQxM2FiYzRlZjQiLCJuYW1lIjoiTWFyaW8gUGVycmEiLCJlbWFpbCI6Im1hcmlhQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX1VTRVIiLCJpbWFnZSI6bnVsbCwiaWF0IjoxNjgwNjk2MzgxLCJleHAiOjE2ODMyODgzODF9.kuTO8TMF-Ty_iFrBc3VmHqcNAPssX1rs8PCbocerGqM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"642d5c0b28b791413abc4ef4\",\n    \"name\": \"Mario Javier\",\n    \"email\": \"maria@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3800/api/update"
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarUsuario",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NDJkNWMwYjI4Yjc5MTQxM2FiYzRlZjQiLCJuYW1lIjoiTWFyaW8gSmF2aWVyIiwiZW1haWwiOiJtYXJpYUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiaW1hZ2UiOm51bGwsImlhdCI6MTY4MDY5NjQ5OCwiZXhwIjoxNjgzMjg4NDk4fQ.ldZYxSFqOS7Cpt-c8DjF1dAq5nZyCMU4jrUJzlp-u5E",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"642d5c0b28b791413abc4ef4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3800/api/delete"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Peticion",
+			"item": [
+				{
+					"name": "GetAHome",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3800/api/peticion/home"
+					},
+					"response": []
+				},
+				{
+					"name": "PostAPruebas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:3800/api/peticion/pruebas"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categoria",
+			"item": [
+				{
+					"name": "GetAHome",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3800/api/categoria/home"
+					},
+					"response": []
+				},
+				{
+					"name": "PostAPruebas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:3800/api/categoria/pruebas"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
