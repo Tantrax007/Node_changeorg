@@ -2,7 +2,7 @@
 
 var jwt = require("jwt-simple")
 var moment = require("moment")
-var secrect_salt = "hola"
+var secrect_salt = "salt"
 exports.createToken = function(user){
     var payload = {
         sub:user._id,

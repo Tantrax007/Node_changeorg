@@ -1,10 +1,8 @@
-"user strict";
-
 var User = require("../model/user");
 var bcrypt = require("bcryptjs");
-const mongoosePaginate = require('mongoose-paginate-v2');
+const mongoosePaginate = require("mongoose-paginate-v2");
 const user = require("../model/user");
-var jwt = require("../services/jwt")
+var jwt = require("../services/jwt");
 //routes
 function home(req, res) {
   res.status(200).send({
@@ -35,7 +33,6 @@ function saveUser(req, res) {
         },
       ],
     }).exec((err, users) => {
-      console.log(users);
       if (err) {
         res.status(500).send({
           message: "Error en la petición",
@@ -48,7 +45,7 @@ function saveUser(req, res) {
       } else {
         //In case no duplicate users it will encrypt the password
         bcrypt.genSalt(10, function (err, salt) {
-          bcrypt.hash(params.password, salt, (err, hash) => {
+          bcrypt.hash(params.password, "salt", (err, hash) => {
             user.password = hash;
             user.save((err, userStored) => {
               //o tendrá un error o un usuario guardado
@@ -112,37 +109,86 @@ function getUsers(req, res) {
   });
 }
 
-function login(req,res) {
-  var params = req.body
-  var email = params.email
-  var password = params.password
+function login(req, res) {
+  var params = req.body;
+  var email = params.email;
+  var password = params.password;
 
-  User.findOne({
-    email:email
-  },(err,user)=>{
-    if(err){
-      return res.status(500).send({
-        message:"Error en la peticion de login"
-      })
-    }if(user){
-      bcrypt.compare(password,user.password,(err,check)=>{
-        if(check){
-          user.password=undefined
-          res.status(200).send({
-            token:jwt.createToken(user)
-          })
-        }else{
-          return res.status(404).send({
-            message:"El usuario no se ha podido identificar"
-          })
-        }
-      })
-    }else{
-      return res.status(404).send({
-        message:"El usuario no se ha podido identificar"
-      })
+  User.findOne(
+    {
+      email: email,
+    },
+    (err, user) => {
+      if (err) {
+        return res.status(500).send({
+          message: "Error en la peticion de login",
+        });
+      }
+      if (user) {
+        bcrypt.compare(password, user.password, (err, check) => {
+          if (check) {
+            user.password = undefined;
+            res.status(200).send({
+              token: jwt.createToken(user),
+            });
+          } else {
+            return res.status(404).send({
+              message: "El usuario no se ha podido identificar",
+            });
+          }
+        });
+      } else {
+        return res.status(404).send({
+          message: "El usuario no se ha podido identificar",
+        });
+      }
     }
-  })
+  );
+}
+
+function updateUser(req, res) {
+  let userId = req.user.sub;
+  let update = req.body;
+
+  delete update.password;
+  User.findByIdAndUpdate(
+    userId,
+    update,
+    {
+      new: true,
+    },
+    (error, userUpdated) => {
+      if (error) {
+        return res.status(500).send({
+          message: "Error en la petición",
+        });
+      }
+      if (!userUpdated) {
+        return res.status(404).send({
+          message: "No se ha podido actualizar el usuario",
+        });
+      }
+      return res.status(200).send({
+        user: userUpdated,
+      });
+    }
+  );
+}
+
+function deleteUser(req, res) {
+  var userId = req.user.sub;
+  User.find({
+    _id: userId,
+  }).remove((err) => {
+    if (err) {
+      return res.status(500).send({
+        message: "Error al borrar el usuario",
+      });
+    }
+    return res.status(200).send({
+      message: "Usuario eliminado correctamente",
+    });
+  });
 }
 
 module.exports = {
@@ -150,5 +196,7 @@ module.exports = {
   pruebas,
   saveUser,
   getUsers,
-  login
+  login,
+  updateUser,
+  deleteUser
 };
