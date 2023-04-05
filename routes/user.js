@@ -1,10 +1,15 @@
-express = require('express')
+'use strict'
 
-UserController = require('../controllers/user_controllers/userController.js')
+var express = require("express")
 
-api = express.Router()
+var UserController = require("../controllers/user")
 
-api.get('/home', UserController.home)
-api.post('/pruebas', UserController.pruebas)
+var api = express.Router()
 
+//routes
+api.get("/home",UserController.home)
+api.get("/pruebas",UserController.pruebas)
+api.post("/saveuser",UserController.saveUser)
+api.get("/getuser/:page",UserController.getUsers)
+api.get("/login",UserController.login)
 module.exports = api
