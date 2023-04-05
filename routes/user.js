@@ -1,10 +1,8 @@
-'use strict'
+let express = require("express")
 
-var express = require("express")
+let UserController = require("../controllers/user")
 
-var UserController = require("../controllers/user")
-
-var api = express.Router()
+let api = express.Router()
 
 //routes
 api.get("/home",UserController.home)
